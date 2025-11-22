@@ -134,7 +134,7 @@ def main():
     DT = 0.1
     
     room = Room(nx=NX, ny=NY, nz=NZ, alpha=0.8, advection_speed=0.2)
-    pid = PIDController(kp=5.0, ki=0.1, kd=0.5, setpoint=22.0)
+    pid = PIDController(kp=20.0, ki=0.0, kd=10.0, setpoint=22.0)
     
     # Setup Plot
     fig = plt.figure(figsize=(12, 8))
@@ -164,13 +164,13 @@ def main():
     s_speed = Slider(ax_speed, 'Speed 2^x', 0, 10, valinit=0, valstep=1)
     
     ax_kp = plt.axes([0.05, 0.6, 0.1, 0.03])
-    t_kp = TextBox(ax_kp, 'Kp', initial="5.0")
+    t_kp = TextBox(ax_kp, 'Kp', initial="20.0")
     
     ax_ki = plt.axes([0.05, 0.55, 0.1, 0.03])
-    t_ki = TextBox(ax_ki, 'Ki', initial="0.1")
+    t_ki = TextBox(ax_ki, 'Ki', initial="0.0")
     
     ax_kd = plt.axes([0.05, 0.5, 0.1, 0.03])
-    t_kd = TextBox(ax_kd, 'Kd', initial="0.5")
+    t_kd = TextBox(ax_kd, 'Kd', initial="10.0")
     
     # Status Text
     status_text = fig.text(0.02, 0.9, "", fontsize=10, verticalalignment='top')
@@ -187,7 +187,7 @@ def main():
                 ki = float(t_ki.text)
                 kd = float(t_kd.text)
             except ValueError:
-                kp, ki, kd = 5.0, 0.1, 0.5 
+                kp, ki, kd = 20.0, 0.0, 10.0 
                 
             pid.kp, pid.ki, pid.kd = kp, ki, kd
             pid.setpoint = s_temp.val
